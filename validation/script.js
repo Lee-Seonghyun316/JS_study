@@ -10,6 +10,7 @@ elPassword.onkeyup = () => {
 };
 elConfirmPassword.onkeyup = () => {
   handleKeyUp(elConfirmPassword, checkPasswordSame);
+  makeAbleSignup();
 };
 
 const handleKeyUp = (elem, onCheck) => {
@@ -20,15 +21,20 @@ const handleKeyUp = (elem, onCheck) => {
   if (onCheck(elem.value)) {
     elSuccess.classList.remove("hide");
     elFailure.classList.add("hide");
-    if (elem === elConfirmPassword) {
-      elSignup.disabled = false;
-    }
   } else {
     elFailure.classList.remove("hide");
     elSuccess.classList.add("hide");
+  }
+};
+
+const makeAbleSignup = () => {
+  if (checkPasswordSame(elConfirmPassword.value) && checkIdLength(elId.value)) {
+    elSignup.disabled = false;
+  } else {
     elSignup.disabled = true;
   }
 };
+
 const checkIdLength = (value) => {
   return value.length >= 4;
 };
