@@ -1,6 +1,7 @@
 const elId = document.querySelector("#id");
 const elPassword = document.querySelector("#password");
 const elConfirmPassword = document.querySelector("#confirmPassword");
+const elSignup = document.querySelector(`#signup`);
 elId.onkeyup = () => {
   handleKeyUp(elId, checkIdLength);
 };
@@ -19,9 +20,13 @@ const handleKeyUp = (elem, onCheck) => {
   if (onCheck(elem.value)) {
     elSuccess.classList.remove("hide");
     elFailure.classList.add("hide");
+    if (elem === elConfirmPassword) {
+      elSignup.disabled = false;
+    }
   } else {
     elFailure.classList.remove("hide");
     elSuccess.classList.add("hide");
+    elSignup.disabled = true;
   }
 };
 const checkIdLength = (value) => {
