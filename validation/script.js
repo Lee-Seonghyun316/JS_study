@@ -1,4 +1,5 @@
 const elId = document.querySelector("#id");
+const elPassword = document.querySelector("#password");
 const elIdFailure = document.querySelector(".failure-text");
 const elIdSuccess = document.querySelector(".success-text");
 elId.onkeyup = () => {
@@ -12,4 +13,12 @@ elId.onkeyup = () => {
 };
 const checkIdLength = (value) => {
   return value.length >= 4;
+};
+
+const checkPasswordLength = (value) => {
+  return value.length >= 8;
+};
+
+const checkPasswordSame = (value) => {
+  return elPassword.value === value;
 };
