@@ -1,14 +1,27 @@
 const elId = document.querySelector("#id");
 const elPassword = document.querySelector("#password");
-const elIdFailure = document.querySelector(".failure-text");
-const elIdSuccess = document.querySelector(".success-text");
+const elConfirmPassword = document.querySelector("#confirmPassword");
 elId.onkeyup = () => {
-  if (checkIdLength(elId.value)) {
-    elIdSuccess.classList.remove("hide");
-    elIdFailure.classList.add("hide");
+  handleKeyUp(elId, checkIdLength);
+};
+elPassword.onkeyup = () => {
+  handleKeyUp(elPassword, checkPasswordLength);
+};
+elConfirmPassword.onkeyup = () => {
+  handleKeyUp(elConfirmPassword, checkPasswordSame);
+};
+
+const handleKeyUp = (elem, onCheck) => {
+  const fieldName = `${elem.id}-field`;
+  const elFailure = document.querySelector(`.${fieldName} .failure-text`);
+  const elSuccess = document.querySelector(`.${fieldName} .success-text`);
+
+  if (onCheck(elem.value)) {
+    elSuccess.classList.remove("hide");
+    elFailure.classList.add("hide");
   } else {
-    elIdFailure.classList.remove("hide");
-    elIdSuccess.classList.add("hide");
+    elFailure.classList.remove("hide");
+    elSuccess.classList.add("hide");
   }
 };
 const checkIdLength = (value) => {
